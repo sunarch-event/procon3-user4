@@ -1,0 +1,9 @@
+<div th:if="${message != null}">
+  <span th:text="${message}"></span>
+</div>
+<div th:if="${executeTime != null}">
+  <div>実行時間（ミリ秒）：<span id="executeTime" th:text="${executeTime}"></span></div>
+</div>
+<div th:if="${resultMessage != null}">
+  <div>アサーション結果：<span id="resultMessage" th:text="${resultMessage}"></span></div>
+</div>

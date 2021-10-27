@@ -1,0 +1,12 @@
+<div th:if="${errorMessage != null}">
+  <span th:text="${errorMessage}"></span>
+</div>
+<div th:if="${message != null}">
+  <span th:text="${message}"></span>
+</div>
+<div th:if="${uuid != null}"　 style="margin-top:20px">
+  <button type="button" class="btn btn-primary" id="btnReference">結果参照</button>
+  <form th:action="@{/reference}" method="POST" id="referenceForm">
+    <input type="hidden" class="form-control" name="uuid" id="uuid" th:value="${uuid}">
+  </form>
+</div>

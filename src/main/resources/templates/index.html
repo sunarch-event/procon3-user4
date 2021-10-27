@@ -1,0 +1,112 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    <!--
+    $(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        // Ajax通信 試験実行ボタンクリック
+        $('#btnTestExecute').on('click', function(event){
+            event.preventDefault();
+            // outputDataを空に初期化
+            $("#processing").html("");
+            $("#result").html("");
+            $('#measureFlag').val('0');
+            $form = $('#executeForm');
+            $.ajax({
+                type: $form.attr('method'),
+                url : $form.attr('action'),
+                data: $form.serialize(),
+                beforeSend : function(xhr, settings){
+                    //Buttonを無効にする
+                    $('#btnTestExecute').attr('disabled' , true);
+                    $('#btnExecute').attr('disabled' , true);
+                },
+            }).always(function(xhr, textStatus){
+                    //Buttonを有効にする
+                    $('#btnTestExecute').attr('disabled' , false);
+                    $('#btnExecute').attr('disabled' , false);
+            }).done(function(data,status,xhr) {
+                    $("#processing").html(data);
+            }).fail(function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert("status:" + XMLHttpRequest.status + ",textStatus:" + textStatus + ",errorThrown:" + errorThrown);
+            });
+        });
+        // Ajax通信 計測実行ボタンクリック
+        $('#btnExecute').on('click', function(event){
+            event.preventDefault();
+            // outputDataを空に初期化
+            $("#processing").html("");
+            $("#result").html("");
+            $('#measureFlag').val('1');
+            $form = $('#executeForm')
+            $.ajax({
+                type: $form.attr('method'),
+                url : $form.attr('action'),
+                data: $form.serialize(),
+                beforeSend : function(xhr, settings){
+                    //Buttonを無効にする
+                    $('#btnTestExecute').attr('disabled' , true);
+                    $('#btnExecute').attr('disabled' , true);
+                }
+            }).always(function(xhr, textStatus){
+                    //Buttonを有効にする
+                    $('#btnTestExecute').attr('disabled' , false);
+                    $('#btnExecute').attr('disabled' , false);
+            }).done(function(data,status,xhr) {
+                    $("#processing").html(data);
+            }).fail(function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert("status:" + XMLHttpRequest.status + ",textStatus:" + textStatus + ",errorThrown:" + errorThrown);
+            });
+        });
+        // Ajax通信 参照ボタンクリック
+        $('body').on('click', '#btnReference', function(event){
+            event.preventDefault();
+            // outputDataを空に初期化
+            $("#result").html("");
+            $form = $('#referenceForm')
+            $.ajax({
+                type: $form.attr('method'),
+                url : $form.attr('action'),
+                data: $form.serialize(),
+                beforeSend : function(xhr, settings){
+                    //Buttonを無効にする
+                    $('#btnTestExecute').attr('disabled' , true);
+                    $('#btnExecute').attr('disabled' , true);
+                }
+            }).always(function(xhr, textStatus){
+                    //Buttonを有効にする
+                    $('#btnTestExecute').attr('disabled' , false);
+                    $('#btnExecute').attr('disabled' , false);
+            }).done(function(data,status,xhr) {
+                    $("#result").html(data);
+            }).fail(function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert("status:" + XMLHttpRequest.status + ",textStatus:" + textStatus + ",errorThrown:" + errorThrown);
+            });
+        });
+    });
+    //-->
+  </script>
+</head>
+<body>
+    <div>
+        <form role="form" th:action="@{/execute}" method="post" id="executeForm" th:object="${performanceForm}">
+            <button type="button" class="btn btn-default" id="btnTestExecute">試験実行</button>
+            <button type="button" class="btn btn-default" id="btnExecute">計測実行</button>
+            <input type="hidden" class="form-control" name="measureFlag" id="measureFlag" value="">
+        </form>
+    </div>
+    <div class="container" style="margin-top:20px">
+      <div class="form-group" id="processing"></div>
+    </div>
+    <div class="container">
+      <div class="form-group" id="result"></div>
+    </div>
+</body>
+</html>
