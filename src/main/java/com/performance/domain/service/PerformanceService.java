@@ -226,7 +226,7 @@ public class PerformanceService {
         }
         // 趣味2に同じ趣味を持っているユーザー
         for(UserMaster user : bloodMatchingUserList) {
-            if(user.getHobby2().equals(targetUserMaster.getHobby1()) || user.getHobby1().equals(targetUserMaster.getHobby2()) || user.getHobby1().equals(targetUserMaster.getHobby3()) || user.getHobby1().equals(targetUserMaster.getHobby4()) || user.getHobby1().equals(targetUserMaster.getHobby5())) {
+            if(user.getHobby2().equals(targetUserMaster.getHobby1()) || user.getHobby2().equals(targetUserMaster.getHobby2()) || user.getHobby2().equals(targetUserMaster.getHobby3()) || user.getHobby2().equals(targetUserMaster.getHobby4()) || user.getHobby2().equals(targetUserMaster.getHobby5())) {
                 if(!matchingUserList.contains(user)) {
                     matchingUserList.add(user);
                 }
@@ -234,7 +234,7 @@ public class PerformanceService {
         }
         // 趣味3に同じ趣味を持っているユーザー
         for(UserMaster user : bloodMatchingUserList) {
-            if(user.getHobby3().equals(targetUserMaster.getHobby1()) || user.getHobby1().equals(targetUserMaster.getHobby2()) || user.getHobby1().equals(targetUserMaster.getHobby3()) || user.getHobby1().equals(targetUserMaster.getHobby4()) || user.getHobby1().equals(targetUserMaster.getHobby5())) {
+            if(user.getHobby3().equals(targetUserMaster.getHobby1()) || user.getHobby3().equals(targetUserMaster.getHobby2()) || user.getHobby3().equals(targetUserMaster.getHobby3()) || user.getHobby3().equals(targetUserMaster.getHobby4()) || user.getHobby3().equals(targetUserMaster.getHobby5())) {
                 if(!matchingUserList.contains(user)) {
                     matchingUserList.add(user);
                 }
@@ -242,7 +242,7 @@ public class PerformanceService {
         }
         // 趣味4に同じ趣味を持っているユーザー
         for(UserMaster user : bloodMatchingUserList) {
-            if(user.getHobby4().equals(targetUserMaster.getHobby1()) || user.getHobby1().equals(targetUserMaster.getHobby2()) || user.getHobby1().equals(targetUserMaster.getHobby3()) || user.getHobby1().equals(targetUserMaster.getHobby4()) || user.getHobby1().equals(targetUserMaster.getHobby5())) {
+            if(user.getHobby4().equals(targetUserMaster.getHobby1()) || user.getHobby4().equals(targetUserMaster.getHobby2()) || user.getHobby4().equals(targetUserMaster.getHobby3()) || user.getHobby4().equals(targetUserMaster.getHobby4()) || user.getHobby4().equals(targetUserMaster.getHobby5())) {
                 if(!matchingUserList.contains(user)) {
                     matchingUserList.add(user);
                 }
@@ -250,7 +250,7 @@ public class PerformanceService {
         }
         // 趣味5に同じ趣味を持っているユーザー
         for(UserMaster user : bloodMatchingUserList) {
-            if(user.getHobby5().equals(targetUserMaster.getHobby1()) || user.getHobby1().equals(targetUserMaster.getHobby2()) || user.getHobby1().equals(targetUserMaster.getHobby3()) || user.getHobby1().equals(targetUserMaster.getHobby4()) || user.getHobby1().equals(targetUserMaster.getHobby5())) {
+            if(user.getHobby5().equals(targetUserMaster.getHobby1()) || user.getHobby5().equals(targetUserMaster.getHobby2()) || user.getHobby5().equals(targetUserMaster.getHobby3()) || user.getHobby5().equals(targetUserMaster.getHobby4()) || user.getHobby5().equals(targetUserMaster.getHobby5())) {
                 if(!matchingUserList.contains(user)) {
                     matchingUserList.add(user);
                 }
@@ -295,7 +295,7 @@ public class PerformanceService {
             return false;
         }
         
-        if(matchingUserList.size() != 874) {
+        if(matchingUserList.size() != 2072) {
             return false;
         }
         
