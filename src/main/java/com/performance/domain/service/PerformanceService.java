@@ -155,7 +155,7 @@ public class PerformanceService {
                     i++;
                     log.info("データ書き込み" + i + "件目");
                     userDao.insertUserInfo(userInfo);
-                    Long id = userDao.selectId(userInfo);
+                    String id = userDao.selectId(userInfo);
                     userHobby.setId(id);
                     userDao.insertUserHobby(userHobby);
                 }

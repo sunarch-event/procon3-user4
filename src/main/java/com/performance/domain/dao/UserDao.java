@@ -45,13 +45,13 @@ public class UserDao {
         jdbcTemplate.execute(sql);
     }
     
-    public Long selectId(UserInfo entity) {
+    public String selectId(UserInfo entity) {
         String sql = "SELECT id ";
         sql = sql + "FROM user_info ";
         sql = sql + "WHERE last_name || first_name = " + "'" + entity.getLastName() + entity.getFirstName() + "'";
         sql = sql + " ORDER BY id desc";
         sql = sql + " LIMIT 1";
-        return jdbcTemplate.queryForObject(sql, Long.class);
+        return jdbcTemplate.queryForObject(sql, String.class);
     }
 
     public List<UserInfo> searchUserInfo() {
@@ -66,10 +66,10 @@ public class UserDao {
     public List<UserHobby> searchUserHobby(UserHobby targetUserHobby) {
         String sql = "SELECT id, hobby1, hobby2, hobby3, hobby4, hobby5 ";
         sql = sql + "FROM user_hobby ";
-        sql = sql + "WHERE id  <> " + targetUserHobby.getId();
+        sql = sql + "WHERE id  <> ? ";
         sql = sql + " ORDER BY id";
         RowMapper<UserHobby> mapper = new BeanPropertyRowMapper<UserHobby>(UserHobby.class);
-        return jdbcTemplate.query(sql, mapper);
+        return jdbcTemplate.query(sql, mapper, targetUserHobby.getId());
     }
     
     public UserInfo getTargetUserInfo() {
@@ -84,9 +84,9 @@ public class UserDao {
     public UserHobby getTargetUserHobby(UserInfo userInfo) {
         String sql = "SELECT id, hobby1, hobby2, hobby3, hobby4, hobby5 ";
         sql = sql + "FROM user_hobby ";
-        sql = sql + "WHERE id = " + userInfo.getId();
+        sql = sql + "WHERE id = ? ";
         RowMapper<UserHobby> mapper = new BeanPropertyRowMapper<UserHobby>(UserHobby.class);
-        return jdbcTemplate.queryForObject(sql, mapper);
+        return jdbcTemplate.queryForObject(sql, mapper, userInfo.getId());
     }
     
     public int searchCount() {
