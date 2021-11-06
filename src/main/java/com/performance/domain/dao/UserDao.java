@@ -1,6 +1,9 @@
 package com.performance.domain.dao;
 
 import java.util.List;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -31,6 +34,27 @@ public class UserDao {
         sql = sql + "'" + entity.getBloodType() + "')";
         jdbcTemplate.execute(sql);
     }
+
+    @Transactional
+    public void batchInsertUserInfo (List<UserInfo> entities) {
+        String sql = "INSERT INTO user_info (id, last_name, first_name, prefectures, city, blood_type) values (?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                ps.setString(1, entities.get(i).getId());
+                ps.setString(2, entities.get(i).getLastName());
+                ps.setString(3, entities.get(i).getFirstName());
+                ps.setString(4, entities.get(i).getPrefectures());
+                ps.setString(5, entities.get(i).getCity());
+                ps.setString(6, entities.get(i).getBloodType());
+            }
+        
+            @Override
+            public int getBatchSize() {
+                return entities.size();
+            }
+        });
+    }
     
     @Transactional
     public void insertUserHobby (UserHobby entity) {
@@ -43,6 +67,27 @@ public class UserDao {
         sql = sql + "'" + entity.getHobby4() + "', ";
         sql = sql + "'" + entity.getHobby5() + "')";
         jdbcTemplate.execute(sql);
+    }
+
+    @Transactional
+    public void batchInsertUserHobby (List<UserHobby> entities) {
+        String sql = "INSERT INTO user_hobby (id, hobby1, hobby2, hobby3, hobby4, hobby5) values (?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                ps.setString(1, entities.get(i).getId());
+                ps.setString(2, entities.get(i).getHobby1());
+                ps.setString(3, entities.get(i).getHobby2());
+                ps.setString(4, entities.get(i).getHobby3());
+                ps.setString(5, entities.get(i).getHobby4());
+                ps.setString(6, entities.get(i).getHobby5());
+            }
+        
+            @Override
+            public int getBatchSize() {
+                return entities.size();
+            }
+        });
     }
     
     public String selectId(UserInfo entity) {
