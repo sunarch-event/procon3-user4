@@ -81,6 +81,7 @@ public class PerformanceService {
         FileReader fr = null;
         BufferedReader br = null;
         List<String> csvFile = new ArrayList<String>();
+        StringBuilder sb = new StringBuilder();
         try {
 
             //読み込みファイルのインスタンス生成
@@ -102,7 +103,11 @@ public class PerformanceService {
                 log.info("-------------------------------");
 
                 //データ件数を表示
-                log.info("データ読み込み" + i + "件目");
+                sb.append("データ読み込み");
+                sb.append(i);
+                sb.append("件目");
+                log.info(sb.toString());
+                sb.setLength(0);
                 
                 csvFile.add(readLine);
             }
@@ -120,7 +125,6 @@ public class PerformanceService {
             List<UserInfo> userInfoList = new ArrayList<>();
             List<UserHobby> UserHobbyList = new ArrayList<>();
             String id;
-            StringBuilder sb = new StringBuilder();
             String lineSeparator = System.getProperty("line.separator");
             Pattern pattern = Pattern.compile(".新潟県,上越市.");
             Map<String, String> map = new LinkedHashMap<String, String>();
@@ -166,7 +170,11 @@ public class PerformanceService {
                 if(matcher.find()) {
                     // 行数のインクリメント
                     i++;
-                    log.info("データ書き込み" + i + "件目");
+                    sb.append("データ書き込み");
+                    sb.append(i);
+                    sb.append("件目");
+                    log.info(sb.toString());
+                    sb.setLength(0);
                     userInfoList.add(userInfo);
                     UserHobbyList.add(userHobby);
                 }
