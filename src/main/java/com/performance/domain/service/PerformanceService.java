@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -118,27 +120,33 @@ public class PerformanceService {
             List<UserInfo> userInfoList = new ArrayList<>();
             List<UserHobby> UserHobbyList = new ArrayList<>();
             String id;
+            StringBuilder sb = new StringBuilder();
+            String lineSeparator = System.getProperty("line.separator");
+            Pattern pattern = Pattern.compile(".新潟県,上越市.");
+            Map<String, String> map = new LinkedHashMap<String, String>();
             for(String line : csvFile) {
                 //カンマで分割した内容を配列に格納する
                 String[] data = line.split(",", -1);
+
+                map.put("ユーザー姓:", data[1]);
+                map.put("出身都道府県:", data[0]);
+                map.put("ユーザー名:", data[2]);
+                map.put("出身市区町村:", data[3]);
+                map.put("血液型:", data[4]);
+                map.put("趣味1:", data[5]);
+                map.put("趣味2:", data[6]);
+                map.put("趣味3:", data[7]);
+                map.put("趣味4:", data[8]);
+                map.put("趣味5:", data[9]);
                 
                 //データ内容をコンソールに表示する
-                log.info("-------------------------------");
-                //データ件数を表示
                 //配列の中身を順位表示する。列数(=列名を格納した配列の要素数)分繰り返す
-                log.debug("ユーザー姓:" + data[1]);
-                log.debug("出身都道府県:" + data[2]);
-                log.debug("ユーザー名:" + data[0]);
-                log.debug("出身市区町村:" + data[3]);
-                log.debug("血液型:" + data[4]);
-                log.debug("趣味1:" + data[5]);
-                log.debug("趣味2:" + data[6]);
-                log.debug("趣味3:" + data[7]);
-                log.debug("趣味4:" + data[8]);
-                log.debug("趣味5:" + data[9]);
+                logoutput(map, sb, lineSeparator);
+                sb.setLength(0);
+                map.clear();
+                
                 UserInfo userInfo = new UserInfo();
                 UserHobby userHobby = new UserHobby();
-
 
                 id = UUID.randomUUID().toString();
                 userInfo.setId(id);
@@ -154,7 +162,6 @@ public class PerformanceService {
                 userHobby.setHobby4(data[8]);
                 userHobby.setHobby5(data[9]);
                 // 特定の件のみインサートするようにする
-                Pattern pattern = Pattern.compile(".新潟県,上越市.");
                 Matcher matcher = pattern.matcher(line);
                 if(matcher.find()) {
                     // 行数のインクリメント
@@ -268,6 +275,21 @@ public class PerformanceService {
         return matchingUserList;
     }
 
+    public void logoutput(Map<String, String> map, StringBuilder sb, String lineSeparator) {
+        //データ件数を表示
+        sb.append("-------------------------------");
+        sb.append(lineSeparator);
+       
+        for(Iterator<Map.Entry<String, String>> iterator = map.entrySet().iterator(); iterator.hasNext();) {
+            Map.Entry<String, String> entry = iterator.next();
+            sb.append(entry.getKey());
+            sb.append(entry.getValue());
+            if(iterator.hasNext()) {
+                sb.append(lineSeparator);
+            }
+        }
+        log.info(sb.toString());
+    }
     
     public void truncateTable() {
         userDao.truncateUserInfo();
