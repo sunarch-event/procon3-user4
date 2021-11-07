@@ -2,7 +2,7 @@ package com.performance.domain.entity;
 
 public class UserMaster {
 
-    private Long id;
+    private String id;
     private String lastName;
     private String firstName;
     private String prefectures;
@@ -14,10 +14,10 @@ public class UserMaster {
     private String hobby4;
     private String hobby5;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
     public String getLastName() {

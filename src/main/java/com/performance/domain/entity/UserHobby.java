@@ -2,17 +2,17 @@ package com.performance.domain.entity;
 
 public class UserHobby {
 
-    private Long id;
+    private String id;
     private String hobby1;
     private String hobby2;
     private String hobby3;
     private String hobby4;
     private String hobby5;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
     public String getHobby1() {

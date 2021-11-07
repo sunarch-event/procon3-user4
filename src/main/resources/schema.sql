@@ -1,5 +1,5 @@
 create table if not exists user_info (
-     id serial
+     id varchar(256) not null
     ,last_name varchar(256) not null
     ,first_name varchar(256) not null
     ,prefectures varchar(8) not null
@@ -8,7 +8,7 @@ create table if not exists user_info (
 );
 
 create table if not exists user_hobby (
-     id integer
+     id varchar(256) not null
     ,hobby1 varchar(256)
     ,hobby2 varchar(256)
     ,hobby3 varchar(256)

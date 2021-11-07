@@ -2,17 +2,17 @@ package com.performance.domain.entity;
 
 public class UserInfo {
 
-    private Long id;
+    private String id;
     private String lastName;
     private String firstName;
     private String prefectures;
     private String city;
     private String bloodType;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
     public String getLastName() {
