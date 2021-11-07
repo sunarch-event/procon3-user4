@@ -2,7 +2,9 @@ package com.performance.domain.service;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -77,18 +79,17 @@ public class PerformanceService {
         /** 変更不可 **/
         
         // CSVを取得・CSVファイルをDBに登録する
-        //ファイル読み込みで使用する3つのクラス
-        FileReader fr = null;
+        //ファイル読み込みで使用するクラス
         BufferedReader br = null;
+        InputStreamReader fs = null;
         List<String> csvFile = new ArrayList<String>();
         StringBuilder sb = new StringBuilder();
         try {
 
             //読み込みファイルのインスタンス生成
             //ファイル名を指定する
-            fr = new FileReader(new File("data/userInfo.csv"));
-            br = new BufferedReader(fr);
-            
+            fs = new InputStreamReader(new FileInputStream(new File("data/userInfo.csv")), StandardCharsets.UTF_8);
+            br = new BufferedReader(fs);            
 
             //読み込み行
             String readLine;
@@ -339,16 +340,16 @@ public class PerformanceService {
         }
         
         // CSVを取得・CSVファイルをDBに登録する
-        //ファイル読み込みで使用する3つのクラス
-        FileReader fr = null;
+        //ファイル読み込みで使用するクラス
+        InputStreamReader fs = null;
         BufferedReader br = null;
         List<String> csvFile = new ArrayList<String>();
         try {
 
             //読み込みファイルのインスタンス生成
             //ファイル名を指定する
-            fr = new FileReader(new File("data/assertionData.csv"));
-            br = new BufferedReader(fr);
+            fs = new InputStreamReader(new FileInputStream(new File("data/assertionData.csv")), StandardCharsets.UTF_8);
+            br = new BufferedReader(fs);
 
             //読み込み行
             String readLine;
